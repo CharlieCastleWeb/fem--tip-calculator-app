@@ -1,8 +1,5 @@
 import "./style.css";
-import { setupCounter } from "./counter.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  
+  <h1 class="text-preset-1">TITULO</h1>
 `;
-
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);

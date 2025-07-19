@@ -1,0 +1,28 @@
+
+@theme {
+  --font-fem-mono: "Space Mono", monospace;
+}
+
+.text-preset-1 {
+  @apply font-fem-mono font-bold text-5xl leading-[1.479167] tracking-[-0.0625rem];
+}
+
+.text-preset-2 {
+  @apply font-fem-mono font-bold text-[2rem] leading-[1.46875] tracking-[-0.041875rem];
+}
+
+.text-preset-3 {
+  @apply font-fem-mono font-bold text-2xl leading-9;
+}
+
+.text-preset-4 {
+  @apply font-fem-mono font-bold text-xl leading-[1.875rem];
+}
+
+.text-preset-5 {
+  @apply font-fem-mono font-bold;
+}
+
+.text-preset-6 {
+  @apply font-fem-mono text-[0.8125rem] leading-[1.46154];
+}
