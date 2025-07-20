@@ -1,5 +1,6 @@
 import { renderInput } from "../Input/input";
 import { renderTipButton } from "../TipButton/TipButton";
+import { renderTipCard } from "../TipCard/TipCard";
 import template from "./MainLayout.html?raw";
 
 export function renderMainLayout(): HTMLElement {
@@ -16,5 +17,6 @@ export function renderMainLayout(): HTMLElement {
       "error"
     )
   );
+  main.appendChild(renderTipCard());
   return main;
 }
