@@ -1,5 +1,8 @@
+import { renderMainLayout } from "./components/MainLayout/MainLayout";
 import "./style.css";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <h1 class="text-preset-1">TITULO</h1>
-`;
+const app = document.querySelector<HTMLDivElement>("#app");
+
+if (app) {
+  app.appendChild(renderMainLayout());
+}

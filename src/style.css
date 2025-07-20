@@ -1,3 +1,4 @@
-@import "./styles/_theme.css";
+@import "./styles/_colors.css";
+@import "./styles/_typography.css";
 @import "./styles/_typography.css";
 @import "tailwindcss";
