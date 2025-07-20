@@ -1,4 +1,5 @@
 @import "./styles/_colors.css";
-@import "./styles/_typography.css";
+@import "./styles/_forms.css";
+@import "./styles/_spacing.css";
 @import "./styles/_typography.css";
 @import "tailwindcss";

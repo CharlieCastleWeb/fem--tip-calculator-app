@@ -1,3 +1,4 @@
+import { renderInput } from "../Input/input";
 import { renderTipButton } from "../TipButton/TipButton";
 import template from "./MainLayout.html?raw";
 
@@ -6,5 +7,6 @@ export function renderMainLayout(): HTMLElement {
   main.classList.add("main-layout");
   main.innerHTML = template;
   main.appendChild(renderTipButton("15%"));
+  main.appendChild(renderInput("tip", "Prueba", "error"));
   return main;
 }
