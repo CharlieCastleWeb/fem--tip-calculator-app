@@ -1,5 +1,7 @@
 export function renderInput(
   name: string,
+  iconSrc: string,
+  iconAlt: string,
   labelText: string,
   errorText?: string
 ): HTMLElement {
@@ -12,7 +14,7 @@ export function renderInput(
   </div>
   <div class="relative">
     <span class="absolute inset-y-0 left-4 flex items-center">
-      <img src="/assets/images/icon-person.svg" alt="Person Icon" />
+      <img src="${iconSrc}" alt="${iconAlt}" />
     </span>
     <input 
       type="number" 

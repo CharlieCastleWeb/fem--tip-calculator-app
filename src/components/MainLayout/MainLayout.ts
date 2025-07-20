@@ -7,6 +7,14 @@ export function renderMainLayout(): HTMLElement {
   main.classList.add("main-layout");
   main.innerHTML = template;
   main.appendChild(renderTipButton("15%"));
-  main.appendChild(renderInput("tip", "Prueba", "error"));
+  main.appendChild(
+    renderInput(
+      "tip",
+      "/assets/images/icon-person.svg",
+      "Person Icon",
+      "Prueba",
+      "error"
+    )
+  );
   return main;
 }
