@@ -3,3 +3,7 @@
 @import "./styles/_spacing.css";
 @import "./styles/_typography.css";
 @import "tailwindcss";
+
+body {
+  @apply bg-fem-grey-200;
+}
