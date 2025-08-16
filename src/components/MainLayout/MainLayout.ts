@@ -3,13 +3,17 @@ import { renderTipCalculator } from "../TipCalculator/TipCalculator";
 export function renderMainLayout(): HTMLElement {
   const main = document.createElement("main");
 
-  const title = document.createElement("h1");
-  // title.textContent = "Splitter";
-  // title.className = "uppercase text-fem-grey-600";
+  const header = document.createElement("header");
 
-  // Cambiar esto por una imagen con el logo ! ! !
+  const logo = document.createElement("img");
+  logo.src = "/assets/images/logo.svg";
+  logo.alt = "Tip Calculator logo";
+  logo.width = 87;
+  logo.height = 54;
+  logo.className = "mx-auto mt-[50px] mb-10 lg:mt-0 lg:mb-22";
 
-  main.appendChild(title);
+  header.appendChild(logo);
+  main.appendChild(header);
 
   main.appendChild(renderTipCalculator());
   return main;

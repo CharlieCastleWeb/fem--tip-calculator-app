@@ -4,10 +4,18 @@ import { renderTipSelector } from "../TipSelector/TipSelector";
 
 export function renderTipCalculator(): HTMLElement {
   const container = document.createElement("div");
-  container.className =
-    "rounded-3xl bg-fem-white px-6 py-8 flex flex-col gap-8";
+  container.className = `
+    rounded-3xl flex flex-col gap-8 bg-fem-white mx-auto px-6 py-8 
+    max-w-[608px] 
+    sm:px-19 sm:py-13 sm:gap-10 
+    lg:max-w-[920px] lg:flex-row 
+    lg:px-10 lg:py-8 lg:gap-12
+  `;
 
-  const billSection = document.createElement("section");
+  const inputPanel = document.createElement("section");
+  inputPanel.className =
+    "pt-0.5 mx-2 flex flex-col gap-8 sm:mx-0 sm:gap-6 lg:pt-4 lg:gap-10";
+  const billSection = document.createElement("div");
   billSection.appendChild(
     renderInput({
       name: "bill",
@@ -16,24 +24,27 @@ export function renderTipCalculator(): HTMLElement {
       iconAlt: "Dollar Icon",
     })
   );
-  container.appendChild(billSection);
+  inputPanel.appendChild(billSection);
 
-  container.appendChild(renderTipSelector([5, 10, 15, 25, 50]));
+  inputPanel.appendChild(renderTipSelector([5, 10, 15, 25, 50]));
 
-  const peopleSection = document.createElement("section");
+  const peopleSection = document.createElement("div");
   peopleSection.appendChild(
     renderInput({
       name: "people",
-      labelText: "People",
+      labelText: "Number of People",
       iconSrc: "assets/images/icon-person.svg",
       iconAlt: "Person Icon",
     })
   );
-  container.appendChild(peopleSection);
+  inputPanel.appendChild(peopleSection);
 
-  const tipCardSection = document.createElement("section");
-  tipCardSection.appendChild(renderTipCard());
-  container.appendChild(tipCardSection);
+  container.appendChild(inputPanel);
+
+  const outputPanel = document.createElement("div");
+  outputPanel.className = "";
+  outputPanel.appendChild(renderTipCard());
+  container.appendChild(outputPanel);
 
   return container;
 }
