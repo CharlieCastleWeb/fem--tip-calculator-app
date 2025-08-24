@@ -1,15 +1,18 @@
 import type { InputOptions } from "../../interfaces/inputOptions";
+import { calculator } from "../../state/calculator.store";
+import type { State } from "../../types/state";
 
 export function renderInput(options: InputOptions): HTMLElement {
   const {
     name,
+    bind,
     labelText,
     placeholder = "0",
     iconSrc,
     iconAlt,
     errorText,
     textCenter = false,
-    initialValue = 0,
+    format,
   } = options;
 
   const container = document.createElement("div");
@@ -47,13 +50,11 @@ export function renderInput(options: InputOptions): HTMLElement {
   if (textCenter) input.classList.add("text-center", "placeholder:text-center");
 
   const emit = () => {
-    const raw = input.value.trim();
-    const value = raw === "" ? 0 : Number(raw);
+    const value = input.valueAsNumber;
     const detail = { name, value: Number.isFinite(value) ? value : 0 };
     container.dispatchEvent(
       new CustomEvent("valuechange", { detail, bubbles: true })
     );
-    console.log("valuechange", detail);
   };
 
   input.addEventListener("input", emit);
@@ -68,6 +69,14 @@ export function renderInput(options: InputOptions): HTMLElement {
     logoImage.alt = iconAlt ?? "";
     logoSpan.appendChild(logoImage);
     inputContainer.appendChild(logoSpan);
+  }
+
+  if (bind) {
+    calculator.subscribe((state: State) => {
+      const number = state[bind];
+      const next = String(number ?? 0);
+      if (input.value !== next) input.value = next;
+    });
   }
 
   return container;

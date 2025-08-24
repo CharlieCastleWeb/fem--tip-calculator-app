@@ -7,6 +7,16 @@ export function renderTipButton(tip: number): HTMLElement {
     focus:bg-fem-green-400 focus:text-fem-green-900 focus:outline-0
     active:bg-fem-green-200 active:text-fem-green-900
   `;
+
+  const emit = () => {
+    const detail = { name: "tipPercent", value: tip };
+    button.dispatchEvent(
+      new CustomEvent("valuechange", { detail, bubbles: true })
+    );
+  };
+
+  button.addEventListener("click", emit);
+
   button.textContent = `${tip}%`;
   button.dataset.value = `${tip}%`;
   return button;

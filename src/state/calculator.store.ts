@@ -5,7 +5,10 @@ let state: State = { bill: 0, tipPercent: 0, people: 0 };
 
 // Subscriptions
 const subs = new Set<(state: State) => void>();
-const notify = () => subs.forEach((fn) => fn(state));
+const notify = () => {
+  subs.forEach((fn) => fn(state));
+  console.log("[Calculator Store] state", state);
+};
 
 export const calculator = {
   getState: () => state,
@@ -33,5 +36,3 @@ export const calculator = {
     notify();
   },
 };
-
-

@@ -1,3 +1,4 @@
+import { formatMoney } from "../../services/format";
 import { calculator } from "../../state/calculator.store";
 import { renderInput } from "../Input/input";
 import { renderTipCard } from "../TipCard/TipCard";
@@ -23,6 +24,8 @@ export function renderTipCalculator(): HTMLElement {
     labelText: "Bill",
     iconSrc: "assets/images/icon-dollar.svg",
     iconAlt: "Dollar Icon",
+    bind: "bill",
+    format: (n) => n.toFixed(2),
   });
   billInput.addEventListener("valuechange", (e: any) => {
     if (e.detail.name === "bill") calculator.setBill(e.detail.value);
@@ -38,9 +41,11 @@ export function renderTipCalculator(): HTMLElement {
     labelText: "Number of People",
     iconSrc: "assets/images/icon-person.svg",
     iconAlt: "Person Icon",
+    bind: "people",
+    format: (n) => String(n ?? 0),
   });
-  billInput.addEventListener("valuechange", (e: any) => {
-    if (e.detail.name === "people") calculator.setBill(e.detail.value);
+  peopleInput.addEventListener("valuechange", (e: any) => {
+    if (e.detail.name === "people") calculator.setPeople(e.detail.value);
   });
   peopleSection.appendChild(peopleInput);
   inputPanel.appendChild(peopleSection);
