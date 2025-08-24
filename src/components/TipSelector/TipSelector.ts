@@ -1,3 +1,4 @@
+import { calculator } from "../../state/calculator.store";
 import { renderInput } from "../Input/input";
 import { renderTipButton } from "../TipButton/TipButton";
 
@@ -14,13 +15,18 @@ export function renderTipSelector(tips: number[]): HTMLElement {
     const button = renderTipButton(tip);
     buttonsContainer.appendChild(button);
   });
-  buttonsContainer.appendChild(
-    renderInput({
-      name: "custom",
-      placeholder: "Custom",
-      textCenter: true,
-    })
-  );
+
+  const customTipInput = renderInput({
+    name: "custom",
+    placeholder: "0",
+    textCenter: true,
+  });
+  customTipInput.addEventListener("valuechange", (e: any) => {
+    if (e.detail.name === "tipPercent")
+      calculator.setTipPercent(e.detail.value);
+  });
+
+  buttonsContainer.appendChild(customTipInput);
 
   container.appendChild(buttonsContainer);
 

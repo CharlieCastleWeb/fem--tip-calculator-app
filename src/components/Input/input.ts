@@ -1,14 +1,6 @@
-interface RenderInputOptions {
-  name: string;
-  labelText?: string;
-  placeholder?: string;
-  iconSrc?: string;
-  iconAlt?: string;
-  errorText?: string;
-  textCenter?: boolean;
-}
+import type { InputOptions } from "../../interfaces/inputOptions";
 
-export function renderInput(options: RenderInputOptions): HTMLElement {
+export function renderInput(options: InputOptions): HTMLElement {
   const {
     name,
     labelText,
@@ -17,6 +9,7 @@ export function renderInput(options: RenderInputOptions): HTMLElement {
     iconAlt,
     errorText,
     textCenter = false,
+    initialValue = 0,
   } = options;
 
   const container = document.createElement("div");
@@ -52,6 +45,18 @@ export function renderInput(options: RenderInputOptions): HTMLElement {
   input.className = `w-full bg-fem-grey-50 text-right px-4 py-2 rounded text-preset-3 text-fem-green-900 h-12
                     focus:outline-2 focus:outline-fem-green-400`;
   if (textCenter) input.classList.add("text-center", "placeholder:text-center");
+
+  const emit = () => {
+    const raw = input.value.trim();
+    const value = raw === "" ? 0 : Number(raw);
+    const detail = { name, value: Number.isFinite(value) ? value : 0 };
+    container.dispatchEvent(
+      new CustomEvent("valuechange", { detail, bubbles: true })
+    );
+    console.log("valuechange", detail);
+  };
+
+  input.addEventListener("input", emit);
   inputContainer.appendChild(input);
   container.appendChild(inputContainer);
 

@@ -1,3 +1,4 @@
+import { calculator } from "../../state/calculator.store";
 import { renderInput } from "../Input/input";
 import { renderTipCard } from "../TipCard/TipCard";
 import { renderTipSelector } from "../TipSelector/TipSelector";
@@ -16,27 +17,32 @@ export function renderTipCalculator(): HTMLElement {
   inputPanel.className =
     "pt-0.5 mx-2 flex flex-col gap-8 sm:mx-0 sm:gap-6 lg:pt-4 lg:gap-10";
   const billSection = document.createElement("div");
-  billSection.appendChild(
-    renderInput({
-      name: "bill",
-      labelText: "Bill",
-      iconSrc: "assets/images/icon-dollar.svg",
-      iconAlt: "Dollar Icon",
-    })
-  );
+
+  const billInput = renderInput({
+    name: "bill",
+    labelText: "Bill",
+    iconSrc: "assets/images/icon-dollar.svg",
+    iconAlt: "Dollar Icon",
+  });
+  billInput.addEventListener("valuechange", (e: any) => {
+    if (e.detail.name === "bill") calculator.setBill(e.detail.value);
+  });
+  billSection.appendChild(billInput);
   inputPanel.appendChild(billSection);
 
   inputPanel.appendChild(renderTipSelector([5, 10, 15, 25, 50]));
 
   const peopleSection = document.createElement("div");
-  peopleSection.appendChild(
-    renderInput({
-      name: "people",
-      labelText: "Number of People",
-      iconSrc: "assets/images/icon-person.svg",
-      iconAlt: "Person Icon",
-    })
-  );
+  const peopleInput = renderInput({
+    name: "people",
+    labelText: "Number of People",
+    iconSrc: "assets/images/icon-person.svg",
+    iconAlt: "Person Icon",
+  });
+  billInput.addEventListener("valuechange", (e: any) => {
+    if (e.detail.name === "people") calculator.setBill(e.detail.value);
+  });
+  peopleSection.appendChild(peopleInput);
   inputPanel.appendChild(peopleSection);
 
   container.appendChild(inputPanel);
