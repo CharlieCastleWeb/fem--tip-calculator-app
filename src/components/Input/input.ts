@@ -1,6 +1,7 @@
 import type { InputOptions } from "../../interfaces/inputOptions";
 import { calculator } from "../../state/calculator.store";
 import type { State } from "../../types/state";
+import type { ValueChangeDetail } from "../../types/valueChangeDetail";
 
 export function renderInput(options: InputOptions): HTMLElement {
   const {
@@ -12,7 +13,6 @@ export function renderInput(options: InputOptions): HTMLElement {
     iconAlt,
     errorText,
     textCenter = false,
-    format,
   } = options;
 
   const container = document.createElement("div");
@@ -31,6 +31,7 @@ export function renderInput(options: InputOptions): HTMLElement {
     if (errorText) {
       const errorSpan = document.createElement("span");
       errorSpan.className = "text-preset-5 text-fem-orange-400";
+      errorSpan.id = `${name}-error`;
       errorSpan.textContent = errorText;
       inputHeader.appendChild(errorSpan);
     }
@@ -49,6 +50,8 @@ export function renderInput(options: InputOptions): HTMLElement {
                     focus:outline-2 focus:outline-fem-green-400`;
   if (textCenter) input.classList.add("text-center", "placeholder:text-center");
 
+  if (errorText) input.setAttribute("aria-describedby", `${name}-error`);
+
   input.addEventListener("focus", () => {
     if (input.value === "0") input.value = "";
   });
@@ -64,7 +67,7 @@ export function renderInput(options: InputOptions): HTMLElement {
     const value = input.valueAsNumber;
     const detail = { name, value: Number.isFinite(value) ? value : 0 };
     container.dispatchEvent(
-      new CustomEvent("valuechange", { detail, bubbles: true })
+      new CustomEvent<ValueChangeDetail>("valuechange", { detail, bubbles: true })
     );
   };
 
@@ -75,6 +78,7 @@ export function renderInput(options: InputOptions): HTMLElement {
   if (iconSrc) {
     const logoSpan = document.createElement("span");
     logoSpan.className = "absolute inset-y-0 left-4 flex items-center";
+    logoSpan.setAttribute("aria-hidden", "true");
     const logoImage = document.createElement("img");
     logoImage.src = iconSrc;
     logoImage.alt = iconAlt ?? "";

@@ -1,3 +1,5 @@
+import type { ValueChangeDetail } from "../../types/valueChangeDetail";
+
 export function renderTipButton(tip: number): HTMLElement {
   const button = document.createElement("button");
   button.className = `
@@ -11,7 +13,7 @@ export function renderTipButton(tip: number): HTMLElement {
   const emit = () => {
     const detail = { name: "tipPercent", value: tip };
     button.dispatchEvent(
-      new CustomEvent("valuechange", { detail, bubbles: true })
+      new CustomEvent<ValueChangeDetail>("valuechange", { detail, bubbles: true })
     );
   };
 

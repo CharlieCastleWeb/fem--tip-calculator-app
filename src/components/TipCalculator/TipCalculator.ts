@@ -1,4 +1,3 @@
-import { formatMoney } from "../../services/format";
 import { calculator } from "../../state/calculator.store";
 import { renderInput } from "../Input/input";
 import { renderTipCard } from "../TipCard/TipCard";

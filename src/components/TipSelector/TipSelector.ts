@@ -1,4 +1,3 @@
-import { formatMoney } from "../../services/format";
 import { calculator } from "../../state/calculator.store";
 import { renderInput } from "../Input/input";
 import { renderTipButton } from "../TipButton/TipButton";
@@ -14,7 +13,6 @@ export function renderTipSelector(tips: number[]): HTMLElement {
     name: "customTipPercent",
     placeholder: "Custom",
     textCenter: true,
-    bind: "tipPercent",
   });
   const customInputEl = customTipInput.querySelector(
     "input"
@@ -31,7 +29,7 @@ export function renderTipSelector(tips: number[]): HTMLElement {
     tipButton.addEventListener("valuechange", (e: any) => {
       calculator.setTipPercent(e.detail.value);
       if (customInputEl) {
-        customInputEl.value = "0";
+        customInputEl.value = "";
       }
     });
     buttonsContainer.appendChild(tipButton);
