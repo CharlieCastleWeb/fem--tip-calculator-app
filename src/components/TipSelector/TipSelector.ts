@@ -12,7 +12,7 @@ export function renderTipSelector(tips: number[]): HTMLElement {
 
   const customTipInput = renderInput({
     name: "customTipPercent",
-    placeholder: "0",
+    placeholder: "Custom",
     textCenter: true,
     bind: "tipPercent",
   });

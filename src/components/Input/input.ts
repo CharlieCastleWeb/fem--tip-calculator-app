@@ -49,6 +49,17 @@ export function renderInput(options: InputOptions): HTMLElement {
                     focus:outline-2 focus:outline-fem-green-400`;
   if (textCenter) input.classList.add("text-center", "placeholder:text-center");
 
+  input.addEventListener("focus", () => {
+    if (input.value === "0") input.value = "";
+  });
+
+  input.addEventListener("blur", () => {
+    if (input.value === "") {
+      input.value = "0";
+      emit();
+    }
+  });
+
   const emit = () => {
     const value = input.valueAsNumber;
     const detail = { name, value: Number.isFinite(value) ? value : 0 };
@@ -74,6 +85,10 @@ export function renderInput(options: InputOptions): HTMLElement {
   if (bind) {
     calculator.subscribe((state: State) => {
       const number = state[bind];
+      if (number === 0) {
+        input.value = "";
+        return;
+      }
       const next = String(number ?? 0);
       if (input.value !== next) input.value = next;
     });

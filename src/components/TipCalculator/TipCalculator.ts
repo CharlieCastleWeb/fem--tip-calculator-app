@@ -25,7 +25,6 @@ export function renderTipCalculator(): HTMLElement {
     iconSrc: "assets/images/icon-dollar.svg",
     iconAlt: "Dollar Icon",
     bind: "bill",
-    format: (n) => n.toFixed(2),
   });
   billInput.addEventListener("valuechange", (e: any) => {
     if (e.detail.name === "bill") calculator.setBill(e.detail.value);
