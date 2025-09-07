@@ -6,7 +6,7 @@ export function renderMainLayout(): HTMLElement {
   const header = document.createElement("header");
 
   const logo = document.createElement("img");
-  logo.src = "/assets/images/logo.svg";
+  logo.src = "assets/images/logo.svg";
   logo.alt = "Tip Calculator logo";
   logo.width = 87;
   logo.height = 54;
